@@ -1,0 +1,64 @@
+<h1>
+<%= @room.name if @room.present? %>
+</h1>
+
+
+
+<div class="row">
+  <div class="col-12 col-md-3">
+    <%= render partial: 'rooms' %>
+  </div>
+
+  <div class="col">
+    <div class="chat">
+    <% if @room_messages.present? %>
+      <% @room_messages.each do |room_message| %>
+        <div class="chat-message-container">
+          <div class="row no-gutters">
+            <div class="col-auto text-center">
+            </div>
+            <div class="col">
+              <div class="message-content">
+                <p class="mb-1">
+                  <%= room_message.message %>
+                </p>
+
+                <div class="text-right">
+                  <small>
+                    <%= room_message.created_at %>
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% end %>
+
+<% if @room_message %>
+  <%= simple_form_for @room_message, remote: true do |form| %>
+    <%= form.hidden_field :room_id, value: @room.id %>
+      <div class="input-group mb-3">
+        <%= form.input :message, as: :string, placeholder: "Enter your message" %>
+        # ... other form fields ...
+      </div>
+    <%= form.submit "Create Message", class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <div class="alert alert-warning">
+    No message found. You can create a new one below.
+  </div>
+  <%= simple_form_for(RoomMessage.new, url: room_messages_path, remote: true) do |form| %>
+    <%= form.hidden_field :room_id, value:  @room.try(:id) %> 
+     <div class="input-group mb-3">
+      <%= form.input :message, as: :string, placeholder: "Enter your message" %>
+     
+    </div>
+    <%= form.submit "Create Message", class: "btn btn-primary" %>
+     <%= form.input :room_id, as: :hidden %>
+  <% end %>
+<% end %>
+
+
+  </div>
+</div>

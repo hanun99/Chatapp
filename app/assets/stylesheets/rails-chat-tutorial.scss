@@ -1,0 +1,46 @@
+// Define the $primary variable
+$primary: #529ceb; 
+$secondary: #5a5441; 
+$white: #e7b6b6;// Replace with your desired color
+
+.room-nav-link {
+    border: 1px solid lighten($primary, 40%);
+    background: lighten($primary, 45%);
+  
+    & + .room-nav-link {
+      border-top: 0 none;
+    }
+  }
+
+  .chat {
+    border: 1px solid lighten($secondary, 40%);
+    background: lighten($secondary, 50%);
+    height: 60vh;
+    border-radius: 5px 5px 0 0;
+    overflow-y: auto;
+  }
+  
+  .chat-input {
+    border-top: 0 none;
+    border-radius: 0 0 10px 5px;
+  }
+
+  .chat-message-container {
+    padding: 5px;
+  
+    .avatar {
+      margin: 5px;
+    }
+  
+    .message-content {
+      padding: 5px;
+      border: 1px solid $primary;
+      border-radius: 5px;
+      background: lighten($primary, 10%);
+      color: $white;
+    }
+  
+    & + .chat-message-container {
+      margin-top: 10px;
+    }
+  }

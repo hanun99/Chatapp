@@ -1,0 +1,8 @@
+<h1>New Room Message</h1>
+
+<%= form_tag create_room_message_path, method: "post" do %>
+  <%= form_for(@room_message) do |form| %>
+  <%= form.text_area :message %>
+  <%= form.submit %>
+<% end %>
+<% end %>
